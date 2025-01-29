@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "aaa29aa8-8ab6-429f-85d1-63f65f768450",
+		"name": "Documentation Java Spring Boot & Vue.js 3 (Vite)",
+		"description": "## Warung Budee'Jum Application! REST **API**\n\nThis project is a RESTful API for managing Warung Budee'Jum, developed using Spring Boot and PostgreSQL. The application allows users to create, read, and delete products and their associated keranjangs and pesanans, with functionalities including user authentication and authorization, and performance testing.\n\n- Created by Budhi Octaviansyah\n    \n- GitHub : [https://github.com/budioct](https://github.com/budioct)\n    \n- Email : [budioct@gmail.com](https://budioct@gmail.com/)\n    \n- Linkeding: [https://www.linkedin.com/in/budhi-octaviansyah/](https://www.linkedin.com/in/budhi-octaviansyah/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7284698"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"ismat@test.com\",\r\n    \"password\" : \"password\",\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "### Register User\n\nThis endpoint is used to register a new user with the provided email, password, and role.\n\n#### Request Body\n\n- email (string, required): The email of the user.\n    \n- password (string, required): The password for the user account.\n    \n- role (string, required): The role of the user (e.g. ADMIN, USER).\n    \n\n#### Response\n\nThe response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"status_code\": {\n            \"type\": \"number\"\n        },\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"errors\": {\n            \"type\": [\"array\", \"null\"]\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"email\": {\n                    \"type\": \"string\"\n                },\n                \"role\": {\n                    \"type\": \"string\"\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"budhiocta@test.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "### Login User\n\nThis endpoint is used to authenticate and login a user.\n\n#### Request Body\n\n- email (string, required): The email of the user.\n    \n- password (string, required): The password for the user account.\n    \n\n#### Response\n\nThe response is in JSON format and follows the schema below:\n\nJSON\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status_code\": {\n      \"type\": \"number\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    },\n    \"errors\": {\n      \"type\": \"null\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"expires_in_minutes\": {\n          \"type\": \"number\"\n        },\n        \"role_is\": {\n          \"type\": \"string\"\n        },\n        \"access_token\": {\n          \"type\": \"string\"\n        },\n        \"refresh_token\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEyOTg1NywiZXhwIjoxNzM4OTkzODU3fQ.AW8CJHgg3LVXBRh5N2i_1IEcqFvGWi6fi7C5_n6FTVV0mjnNNopjM2uwVnCLgVDVhlDCkd4XbAyzkrhp1MSgoQjYAGypRTpRNIjO-sxvTXtW9rSZLLtu0l2rjzWbhA-KhPHsngPitt7WyOLBIjfI7fCzEPbS7I-O-G-UbHmCpAp4dTRL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/token/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"token",
+								"refresh"
+							]
+						},
+						"description": "### Refresh Token\n\nThis endpoint allows the user to refresh their authentication token.\n\n**Request Header**\n\n- **Auth type Bearer Token:** refresh_token\n    \n\n#### Request Body\n\n- No request body parameters required for this endpoint.\n    \n\n#### Response\n\n- Status: 200\n    \n- Content Type: application/json\n    \n- **data** (object)\n    \n    - expires_in_minutes (number): The expiration time of the new access token in minutes.\n        \n    - role_is (string): The role of the user.\n        \n    - access_token (string): The new access token.\n        \n    - refresh_token (string): The new refresh token."
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJzdWIiOiJha21hbEB0ZXN0LmNvbSIsImlhdCI6MTczNTcwNTk4MywiZXhwIjoxNzM2NTY5OTgzfQ.Aem22zqrO_RN7BGapCGt52lmSUuxYg3nq6mP3GOY_Kiq3nqHQsGBEBX5D73i5m8rt7mHuP9lPrcbsMGWY8Xn1blGARZle9KCJq11uOKWb4cjVxexHWcKq-Rq0k8Sw2z600fqNKW-QkySZlEZ1paVAB4rwe40T8ZMdqA0FV5U2AahJRIR",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"password\",\r\n    \"newPassword\": \"passwordupdate\",\r\n    \"confirmationPassword\": \"passwordupdate\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEyOTk5OSwiZXhwIjoxNzM4OTkzOTk5fQ.Aa9BCusZJzNHe-s201Maw47hrMF4oD7P998gmbWjyiU1RtoyY4ESm2OE_ft_1zlVfP6HioZtspB_YfWk8yMnxtydADHLYmC9aJkzc9LAnRYR_77hx8k5K4hcd3hfSz6LOqRHe1RvwRKiYqKIMjjfCg6JSECKm7y9cPpdbyYgo7LFSLwF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "### Auth Logout\n\nThis endpoint is used to log out the user from the application.\n\n**Request Header**\n\n- **Auth type Bearer Token: access_token**\n    \n\n**Request Body**\n\n- No request body is required for this endpoint.\n    \n\n**Response**\n\n- Status: 200\n    \n- Content-Type: text/xml\n    \n- The response body is empty (null)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "list product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMDE0MSwiZXhwIjoxNzM4OTk0MTQxfQ.AYs7l2oFadf9oWe_Zbm0tpP3noomvJSzETRSBVK31nfFk48RASKNky0MgENU36iGmQbt1eZc-kt7VIR-yct3ItO6ASKKybJX2nZBASbI39qrg_ehxQc6engS7U2Ra6kmuOqzD6hZ-cV92PA8XvZsVageQcWP0tP7hY3Ero9Jt7m7mXYU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/fetch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"fetch"
+							]
+						},
+						"description": "### Fetch Products\n\nThis endpoint retrieves a list of products.\n\n#### Request\n\n- Method: GET\n    \n- URL: `http://localhost:8080/api/v1/products/fetch`\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n  \"products\": [\n    {\n      \"id\": \"number\",\n      \"kode\": \"string\",\n      \"nama\": \"string\",\n      \"harga\": \"number\",\n      \"is_ready\": \"boolean\",\n      \"gambar\": \"string\",\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string | null\"\n    }\n  ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "list product Favorite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMDE0MSwiZXhwIjoxNzM4OTk0MTQxfQ.AYs7l2oFadf9oWe_Zbm0tpP3noomvJSzETRSBVK31nfFk48RASKNky0MgENU36iGmQbt1eZc-kt7VIR-yct3ItO6ASKKybJX2nZBASbI39qrg_ehxQc6engS7U2Ra6kmuOqzD6hZ-cV92PA8XvZsVageQcWP0tP7hY3Ero9Jt7m7mXYU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/fetch/best",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"fetch",
+								"best"
+							]
+						},
+						"description": "### Fetch Products Favorite\n\nThis endpoint retrieves a list of products Favorite.\n\n#### Request\n\n- Method: GET\n    \n- URL: [http://localhost:8080/api/v1/products/fetch/best](http://localhost:8080/api/v1/products/fetch/bestEndFragment)\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n  \"products\": [\n    {\n      \"id\": \"number\",\n      \"kode\": \"string\",\n      \"nama\": \"string\",\n      \"harga\": \"number\",\n      \"is_ready\": \"boolean\",\n      \"gambar\": \"string\",\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string | null\"\n    }\n  ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "detail product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMDE0MSwiZXhwIjoxNzM4OTk0MTQxfQ.AYs7l2oFadf9oWe_Zbm0tpP3noomvJSzETRSBVK31nfFk48RASKNky0MgENU36iGmQbt1eZc-kt7VIR-yct3ItO6ASKKybJX2nZBASbI39qrg_ehxQc6engS7U2Ra6kmuOqzD6hZ-cV92PA8XvZsVageQcWP0tP7hY3Ero9Jt7m7mXYU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/1/detail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"1",
+								"detail"
+							]
+						},
+						"description": "### Retrieve Product Details\n\nThis endpoint makes an HTTP GET request to retrieve the details of a specific product.\n\n#### Request\n\n- Method: GET\n    \n- URL: [http://localhost:8080/api/v1/products/1/detail](http://localhost:8080/api/v1/products/1/detail)\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Request Path Variable\n\n- id: (number) data from a product.\n    \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n    \"status_code\": \"number\",\n    \"message\": \"string\",\n    \"errors\": \"string\",\n    \"data\": {\n        \"id\": \"number\",\n        \"kode\": \"string\",\n        \"nama\": \"string\",\n        \"harga\": \"interger\",\n        \"is_ready\": \"boolean\",\n        \"gambar\": \"string\",\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string | null\"\n    }\n}\n\n ```\n\nThe response contains the details of the product including the product ID, code, name, price, availability status, image, creation date, and last update date."
+					},
+					"response": []
+				},
+				{
+					"name": "add product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMDk1MSwiZXhwIjoxNzM4OTk0OTUxfQ.Ab4Zc43xpKEXc2dhPKya8WCibpxoW5yFICOsKgiskxcweCMQDxLoYIf7trtM822Q7Oore4IBi0VWk_SRfZjHjiCZAGZcipzRbbipWg88zBTK4ci3LNPObkTNUhxuxmCbczAFhLPTyWkJ8ZSwicfGSHHOxuqWqxlVxzzeIw8gFD1zmCD1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"kode\" : \"K-045\",\r\n    \"nama\" : \"Soto Betawa\",\r\n    \"harga\" : \"18000\",\r\n    \"isReady\" : \"true\",\r\n    \"gambar\" : \"soto-betawai.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"create"
+							]
+						},
+						"description": "### Create Product\n\nThis endpoint create a products.\n\n#### Request\n\n- Method: POST\n    \n- URL: [http://localhost:8080/api/v1/products/create](http://localhost:8080/api/v1/products/1/detail)\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Request Body\n\n- `kode`: (string) The product code.\n    \n- `nama`: (string) The name of the product.\n    \n- `harga`: (string) The price of the product.\n    \n- `isReady`: (boolean) Indicates if the product is ready.\n    \n- `gambar`: (string) The image of the product.\n    \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n    \"status_code\": \"number\",\n    \"message\": \"string\",\n    \"errors\": \"string\",\n    \"data\": {\n        \"id\": \"number\",\n        \"kode\": \"string\",\n        \"nama\": \"string\",\n        \"harga\": \"interger\",\n        \"is_ready\": \"boolean\",\n        \"gambar\": \"string\",\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string | null\"\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMDk1MSwiZXhwIjoxNzM4OTk0OTUxfQ.Ab4Zc43xpKEXc2dhPKya8WCibpxoW5yFICOsKgiskxcweCMQDxLoYIf7trtM822Q7Oore4IBi0VWk_SRfZjHjiCZAGZcipzRbbipWg88zBTK4ci3LNPObkTNUhxuxmCbczAFhLPTyWkJ8ZSwicfGSHHOxuqWqxlVxzzeIw8gFD1zmCD1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/27/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"27",
+								"remove"
+							]
+						},
+						"description": "### Remove Product\n\nThis endpoint request to remove a product with the ID 27.\n\n#### Request\n\n- Method: DELETE\n    \n- URL: [http://localhost:8080/api/v1/products/27/remove](http://localhost:8080/api/v1/products/27/remove)\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Request Path Variable\n\n- id: (number) data from a product.\n    \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n    \"status_code\": \"number\",\n    \"message\": \"number\",\n    \"errors\": \"string | null\",\n    \"data\": \"null\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Keranjangs",
+			"item": [
+				{
+					"name": "list keranjang",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMTY1OSwiZXhwIjoxNzM4OTk1NjU5fQ.ADHoQUkcs_DpvSWd3wp0qymmNTkNxYOt2XOb9CK9jhCzUMvfip5orl8gPiEg94yAhxIqGuCimsvr1zZHAWE4dOD7ASIKmtjxxL6DJwsol3a38s6NiPNXRCOGhEffZSnk55pSAUdxO2Rbh3nQnZoDWuOSbcB9Bdrrxn7tO0KnvHkonOXt",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/keranjangs/fetch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"keranjangs",
+								"fetch"
+							]
+						},
+						"description": "### Fetch Keranjangs\n\nThis endpoint retrieves a list of keranjangs.\n\n#### Request\n\n- Method: GET\n    \n- URL: `http://localhost:8080/api/v1/keranjangs/fetch`\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Response\n\nThe response is in JSON format and has the following schema:\n\n``` json\n{\n  \"keranjangs\": [\n    {\n      \"id\": \"number\",\n      \"jumlah_pemesanan\": \"number\",\n      \"keterangan\": \"string\",\n      \"products\": {\n        \"id\": \"number\",\n        \"kode\": \"string\",\n        \"nama\": \"string\",\n        \"harga\": \"number\",\n        \"is_ready\": \"boolean\",\n        \"gambar\": \"string\"\n      },\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string\"\n    }\n  ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "add keranjang",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMTY1OSwiZXhwIjoxNzM4OTk1NjU5fQ.ADHoQUkcs_DpvSWd3wp0qymmNTkNxYOt2XOb9CK9jhCzUMvfip5orl8gPiEg94yAhxIqGuCimsvr1zZHAWE4dOD7ASIKmtjxxL6DJwsol3a38s6NiPNXRCOGhEffZSnk55pSAUdxO2Rbh3nQnZoDWuOSbcB9Bdrrxn7tO0KnvHkonOXt",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jumlahPemesanan\" : \"1\",\r\n    \"keterangan\" : \"pedas manis\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/product/1/keranjangs/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1",
+								"keranjangs",
+								"create"
+							]
+						},
+						"description": "### Create Keranjangs\n\nThe endpoint creates a new item in the shopping cart for a specific product.\n\n#### Request\n\n- Method: POST\n    \n- URL: `http://localhost:8080/api/v1/keranjangs/create`\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n### Response\n\nThe response is in JSON format and follows the schema below:\n\n``` json\n{\n  \"status_code\": \"number\",\n    \"message\": \"string\",\n    \"errors\": \"string | null\",\n    \"data\": {\n      \"id\": \"number\",\n      \"jumlah_pemesanan\": \"number\",\n      \"keterangan\": \"string\",\n      \"products\": {\n        \"id\": \"number\",\n        \"kode\": \"string\",\n        \"nama\": \"string\",\n        \"harga\": \"number\",\n        \"is_ready\": \"boolean\",\n        \"gambar\": \"string\"\n      },\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string\"\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "remove keranjang",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMTY1OSwiZXhwIjoxNzM4OTk1NjU5fQ.ADHoQUkcs_DpvSWd3wp0qymmNTkNxYOt2XOb9CK9jhCzUMvfip5orl8gPiEg94yAhxIqGuCimsvr1zZHAWE4dOD7ASIKmtjxxL6DJwsol3a38s6NiPNXRCOGhEffZSnk55pSAUdxO2Rbh3nQnZoDWuOSbcB9Bdrrxn7tO0KnvHkonOXt",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jumlahPemesanan\" : \"4\",\r\n    \"keterangan\" : \"pedas berkuah\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/product/1/keranjangs/4/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1",
+								"keranjangs",
+								"4",
+								"remove"
+							]
+						},
+						"description": "### Remove Keranjangs\n\nThis endpoint request to remove a keranjangs, from ID product: 1 than ID keranjangs: 4.\n\n#### Request\n\n- Method: DELETE\n    \n- URL: [http://localhost:8080/api/v1/product/1/keranjangs/4/remove](http://localhost:8080/api/v1/products/27/remove)\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Request Path Variable\n\n- id: (number) data from a product\n    \n- id: (number) data from a keranjang\n    \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n    \"status_code\": \"number\",\n    \"message\": \"number\",\n    \"errors\": \"string | null\",\n    \"data\": \"null\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pesanans",
+			"item": [
+				{
+					"name": "list pesanans",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMTY1OSwiZXhwIjoxNzM4OTk1NjU5fQ.ADHoQUkcs_DpvSWd3wp0qymmNTkNxYOt2XOb9CK9jhCzUMvfip5orl8gPiEg94yAhxIqGuCimsvr1zZHAWE4dOD7ASIKmtjxxL6DJwsol3a38s6NiPNXRCOGhEffZSnk55pSAUdxO2Rbh3nQnZoDWuOSbcB9Bdrrxn7tO0KnvHkonOXt",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/pesanans/fetch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pesanans",
+								"fetch"
+							]
+						},
+						"description": "### Fetch Pesanans\n\nThis endpoint retrieves a list of pesanans.\n\n#### Request\n\n- Method: GET\n    \n- URL: [http://localhost:8080/api/v1/pesanans](http://localhost:8080/api/v1/pesanans)\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n\n#### Response\n\nThe response is in JSON format and has the following schema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"pesanans\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"id\": {\n                        \"type\": \"integer\"\n                    },\n                    \"nama\": {\n                        \"type\": \"string\"\n                    },\n                    \"noMeja\": {\n                        \"type\": \"string\"\n                    },\n                    \"keranjangs\": {\n                        \"type\": \"array\"\n                    },\n                    \"createdAt\": {\n                        \"type\": \"string\"\n                    },\n                    \"updatedAt\": {\n                        \"type\": [\"string\", \"null\"]\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "add pesanans",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJFUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6ImJ1ZGhpb2N0YUB0ZXN0LmNvbSIsImlhdCI6MTczODEzMTY1OSwiZXhwIjoxNzM4OTk1NjU5fQ.ADHoQUkcs_DpvSWd3wp0qymmNTkNxYOt2XOb9CK9jhCzUMvfip5orl8gPiEg94yAhxIqGuCimsvr1zZHAWE4dOD7ASIKmtjxxL6DJwsol3a38s6NiPNXRCOGhEffZSnk55pSAUdxO2Rbh3nQnZoDWuOSbcB9Bdrrxn7tO0KnvHkonOXt",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\" : \"budhi\",\r\n    \"noMeja\" : \"1\",\r\n    \"keranjang_ids\" : [\r\n        5,\r\n        6,\r\n        7\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/pesanans/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pesanans",
+								"create"
+							]
+						},
+						"description": "### Create Keranjangs\n\nThe endpoint creates a new item in the shopping cart for a specific product.\n\n#### Request\n\n- Method: POST\n    \n- URL: `http://localhost:8080/api/v1/keranjangs/create`\n    \n- **Request Header**\n    \n    - **Auth type Bearer Token: access_token**\n        \n- Request Body\n    \n    - `nama` (string): The name associated with the order.\n        \n    - `noMeja` (string): The table number for the order.\n        \n    - `keranjang_ids` (array of integers): An array of item IDs in the order.\n        \n\n### Response\n\nThe response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"status_code\": \"number\",\n    \"message\": \"string\",\n    \"errors\": \"string | number\",\n    \"data\": {\n        \"id\": \"number\",\n        \"nama\": \"string\",\n        \"noMeja\": \"string\",\n        \"keranjangs\": [\n            {\n                \"id\": \"number\",\n                \"jumlah_pemesanan\": \"number\",\n                \"keterangan\": \"string\",\n                \"products\": {\n                    \"id\": \"number\",\n                    \"kode\": \"string\",\n                    \"nama\": \"string\",\n                    \"harga\": \"number\",\n                    \"is_ready\": \"boolean\",\n                    \"gambar\": \"string\"\n                }\n            },\n            {\n                \"id\": \"number\",\n                \"jumlah_pemesanan\": \"number\",\n                \"keterangan\": \"string\",\n                \"products\": {\n                    \"id\": \"number\",\n                    \"kode\": \"string\",\n                    \"nama\": \"string\",\n                    \"harga\": \"number\",\n                    \"is_ready\": \"boolean\",\n                    \"gambar\": \"string\"\n                }\n            },\n            {\n                \"id\": \"number\",\n                \"jumlah_pemesanan\": \"number\",\n                \"keterangan\": \"string\",\n                \"products\": {\n                    \"id\": \"number\",\n                    \"kode\": \"string\",\n                    \"nama\": \"string\",\n                    \"harga\": \"number\",\n                    \"is_ready\": \"boolean\",\n                    \"gambar\": \"string\"\n                }\n            }\n        ],\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string | null\"\n    }\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

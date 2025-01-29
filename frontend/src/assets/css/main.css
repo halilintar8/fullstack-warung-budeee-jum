@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    line-height: 1.6;
+}
+
+#app {
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-family: 'Quicksand', sans-serif;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Form Validation */
+.is-invalid {
+    border-color: red;
+}
+.text-danger {
+    color: red;
+    font-size: 0.8rem;
+}
+/* Form Validation */
+
+/* Router Link Active */
+.router-link-exact-active {
+    color: #6CB52D !important;
+    font-weight: bold !important;
+}
+/* Router Link Active */
+
+.btn-success {
+    background-color: #6CB52D !important;
+}
+
+.badge-success {
+    background-color: #6CB52D !important;
+}
+
+.card-product {
+    border-radius: 15px;
+}
+
+.card-img-top {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+}
+
+.breadcrumb-item.active {
+    font-weight: bold;
+    color: black;
+}
+
+.img-fluid {
+    border-radius: 15px;
+}
+
+nav .nav-item:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.7rem;
+    color: #6CB52D;
+}
+
+nav ol{
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    color: black;
+}
+
+.dejum {
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
+    color: #6CB52D;
+    font-weight: bold;
+}
+
+/* Fade Transition */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+#nprogress .bar {
+    background: #6CB52D !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: #6CB52D !important;
+    border-left-color: #6CB52D !important;
+}
