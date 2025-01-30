@@ -1,37 +1,62 @@
+version: '3.8'
+
 services:
-  postgresql:
-    container_name: postgresql
-    image: postgres
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      db:
+        condition: service_healthy  # Ensures PostgreSQL is ready before backend starts
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/warung_budeee_jum
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      # - "3000:5000"  # Change frontend to map to standard web port
+      - "5173:5173"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  db:
+    image: postgres:latest
+    container_name: postgres
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      PGDATA: /data/postgres
+      POSTGRES_DB: warung_budeee_jum
     volumes:
-      - postgres:/data/postgres
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql  # Ensure schema.sql is executed
     ports:
       - "5432:5432"
     networks:
-      - postgres
+      - app-network
     restart: unless-stopped
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-    ports:
-      - "5050:80"
-    networks:
-      - postgres
-    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d warung_budeee_jum"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
-  postgres:
+  app-network:
     driver: bridge
 
 volumes:
-  postgres:
-  pgadmin:
+  postgres_data:
